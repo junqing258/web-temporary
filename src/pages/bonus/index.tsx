@@ -28,17 +28,15 @@ export const Bonus: React.FC = (props: any = fakeInfo) => {
   );
 };
 
-const withBonus = (props: any) => (Component: React.ComponentType) => {
-  return () => {
-    const [info, setInfo] = useState(props);
-    useEffect(() => {
-      setTimeout(() => {
-        props.count += 1;
-        setInfo({ ...props });
-      }, 100);
-    }, []);
-    return <Component {...info} />;
-  };
+const withBonus = (initState: any) => (Component: React.ComponentType) => (props: any) => {
+  const [info, setInfo] = useState(initState);
+  useEffect(() => {
+    setTimeout(() => {
+      initState.count += 1;
+      setInfo({ ...initState });
+    }, 100);
+  }, []);
+  return <Component {...info} />;
 };
 
 export default withBonus(fakeInfo)(Bonus);
