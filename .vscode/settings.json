@@ -1,0 +1,22 @@
+{
+  "cSpell.words": [
+    "Entrypoints",
+    "Lngs",
+    "MMDDHH",
+    "flexboxgrid",
+    "languagedetector",
+    "makegrid",
+    "mixins",
+    "reakit",
+    "rehooks"
+  ],
+  "i18n-ally.localesPaths": "public/locales",
+  "i18n-ally.enabledFrameworks": ["react", "i18next"],
+  "i18n-ally.namespace": true,
+  "i18n-ally.pathMatcher": "{locale}/{namespaces}.json",
+  "i18n-ally.keystyle": "nested",
+  "i18n-ally.keysInUse": ["description.part2_whatever"],
+  "i18n-ally.defaultNamespace": "translation",
+  "i18n-ally.editor.preferEditor": false,
+  "react-i18n.i18nPaths": "public/locales"
+}

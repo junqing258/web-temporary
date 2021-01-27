@@ -1,0 +1,5 @@
+src/libs/react-app-env.d.ts
+node_modules/**
+**/dist/**
+**/bin/**
+**/tests/**
