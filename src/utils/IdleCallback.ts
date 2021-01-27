@@ -31,7 +31,7 @@ const requestIdleCallback = (window.requestIdleCallback =
  */
 const cancelIdleCallback = (window.cancelIdleCallback =
   window.cancelIdleCallback ||
-  function (id) {
+  function (id: NodeJS.Timeout) {
     clearTimeout(id);
   });
 

@@ -5,7 +5,10 @@ import { useTranslation } from 'react-i18next';
 
 import styles from './index.module.less';
 
-const Bonus: React.FC = () => {
+const fakeInfo = { count: 0 };
+
+export const Bonus: React.FC = (props: any = fakeInfo) => {
+  const { count } = props;
   const { t } = useTranslation(['pages/apply']);
   const [data, setData] = useState<any>();
 
@@ -20,8 +23,22 @@ const Bonus: React.FC = () => {
   return (
     <div className={classNames('container-fluid', styles.warp)}>
       <h1>{data.title}</h1>
+      <p>count: {count}</p>
     </div>
   );
 };
 
-export default Bonus;
+const withBonus = (props: any) => (Component: React.ComponentType) => {
+  return () => {
+    const [info, setInfo] = useState(props);
+    useEffect(() => {
+      setTimeout(() => {
+        props.count += 1;
+        setInfo({ ...props });
+      }, 100);
+    }, []);
+    return <Component {...info} />;
+  };
+};
+
+export default withBonus(fakeInfo)(Bonus);

@@ -8,9 +8,9 @@ import styles from './index.module.less';
 const Apply: React.FC = () => {
   const { t } = useTranslation('pages/apply');
 
-  useEffect(() => {
-    throw new Error('some error');
-  }, []);
+  // useEffect(() => {
+  //   throw new Error('some error');
+  // }, []);
 
   return (
     <div className={classNames('container-fluid', styles.warp)}>

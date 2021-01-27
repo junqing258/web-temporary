@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/explicit-module-boundary-types */
 import { omit } from '@/utils/snippets';
 import React from 'react';
 
@@ -13,7 +14,7 @@ export class ErrorBoundary extends React.Component<WrapperPropsType, any> {
     this.state = { hasError: false };
   }
 
-  static getDerivedStateFromError(error: any): any {
+  static getDerivedStateFromError(): any {
     // 更新 state 使下一次渲染能够显示降级后的 UI
     return { hasError: true };
   }

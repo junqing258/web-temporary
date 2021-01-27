@@ -4,6 +4,8 @@ import XhrBackend from 'i18next-xhr-backend';
 import LanguageDetector from 'i18next-browser-languagedetector';
 import { initReactI18next } from 'react-i18next';
 
+const globalThis = require('globalthis')();
+
 export type ValuesOf<T extends any[]> = T[number];
 
 export type LangType = 'en' | 'zh-Hans' | 'zh-Hant';
@@ -11,7 +13,7 @@ export type LangType = 'en' | 'zh-Hans' | 'zh-Hant';
 export const supportedLngs = ['en', 'zh-Hans', 'zh-Hant'];
 
 export const getLanguage = (): LangType => {
-  return i18n.language || (typeof globalThis !== 'undefined' && globalThis.localStorage.i18nextLng) || 'en';
+  return i18n.language || (typeof globalThis !== 'undefined' && globalThis.localStorage?.i18nextLng) || 'en';
 };
 
 i18n
