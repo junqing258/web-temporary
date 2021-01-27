@@ -1,0 +1,94 @@
+/**
+ * Gradients
+ * @module gradients
+ * {@link http://www.w3.org/TR/css3-images/#gradients Specification}
+ * =====================================================================================================================
+ */
+
+/**
+ * Linear Gradient
+ * {@link https://css-tricks.com/css3-gradients/ CSS Tricks}
+ *
+ * @example
+ * .linear-gradient(@colors: red, #f06d06;);
+ * .linear-gradient(@angle: 45deg; @colors: red, #f06d06;);
+ * .linear-gradient(@angle: 90deg; @colors: red 0%, #f06d06 50%, rgb(255, 255, 0) 100%;);
+ * .linear-gradient(@angle: 100grad; @colors: #fffdc2, #fffdc2 15%, #d7f0a2 15%, #d7f0a2 85%, #fffdc2 85%;);
+ */
+.linear-gradient(@angle: 180deg; @colors; @svg: no) {
+    @angle-new: mod(convert(@angle, deg), 360);
+    @angle-old: 90deg - @angle-new;
+    @angle-index: round(unit(@angle-new / 45)) + 1;
+
+    @directions: top, top right, right, bottom right, bottom, bottom left, left, top left;
+    @direction: extract(@directions, @angle-index);
+
+    .ie9 & when (@svg = yes) {
+        .svg-gradient(@direction: to @direction; @colors: @colors); // IE 9
+    }
+
+    background-image: -webkit-linear-gradient(@angle-old, @colors); // Chrome 25-10, Safari 6-5.1
+    background-image:    -moz-linear-gradient(@angle-old, @colors); // Firefox 15-3.6
+    background-image:      -o-linear-gradient(@angle-old, @colors); // Opera 12-11.1
+    background-image:         linear-gradient(@angle-new, @colors); // Chrome 26+, Firefox 16+, IE 10+, Safari 6.1+,
+                                                                    // Opera 12.1+
+}
+
+/**
+ * <Direction> Gradient
+ *
+ * @example
+ * .vertical-gradient(red, #f06d06 50%, rgb(255, 255, 0););
+ */
+.vertical-gradient(@colors)        { .linear-gradient(@angle: 180deg; @colors: @colors); }
+.horizontal-gradient(@colors)      { .linear-gradient(@angle:  90deg; @colors: @colors); }
+.diagonal-top-gradient(@colors)    { .linear-gradient(@angle:  45deg; @colors: @colors); }
+.diagonal-bottom-gradient(@colors) { .linear-gradient(@angle: 135deg; @colors: @colors); }
+
+/**
+ * Radial Gradient
+ * {@link https://css-tricks.com/css3-gradients/ CSS Tricks}
+ *
+ * @example
+ * .radial-gradient(@colors: yellow, #f06d06;);
+ * .radial-gradient(@shape: circle; @size: 100px; @colors: yellow, #f06d06;);
+ * .radial-gradient(@shape: circle; @position: left; @colors: yellow, #f06d06;);
+ * .radial-gradient(@shape: circle; @position: right top; @colors: yellow, #f06d06;);
+ */
+.radial-gradient(@shape: ellipse; @size: ~""; @position: center; @colors; @svg: no) {
+    .ie9 & when (@svg = yes) {
+        .svg-gradient(@direction: @shape at @position; @colors: @colors); // IE 9
+    }
+
+    background-image: -webkit-radial-gradient(@position, @shape @size, @colors); // Chrome 25-10, Safari 6-5.1
+    background-image:    -moz-radial-gradient(@position, @shape @size, @colors); // Firefox 15-3.6
+    background-image:      -o-radial-gradient(@position, @shape @size, @colors); // Opera 12-11.6
+    background-image:         radial-gradient(@shape @size at @position, @colors); // Chrome 26+, Firefox 16+, IE 10+,
+                                                                                   // Safari 6.1+, Opera 12.1+
+}
+
+/**
+ * <Shape> Gradient (position at center)
+ *
+ * @example
+ * .ellipse-gradient(yellow, #f06d06;);
+ */
+.circle-gradient(@colors)  { .radial-gradient(@shape: circle;  @position: center; @colors: @colors); }
+.ellipse-gradient(@colors) { .radial-gradient(@shape: ellipse; @position: center; @colors: @colors); }
+
+/**
+ * SVG Gradient
+ * {@link http://lesscss.org/functions/#misc-functions-svg-gradient LESS Function Reference}
+ *
+ * @example
+ * .svg-gradient(@direction: to bottom; @colors: #00f, #fff;);
+ */
+.svg-gradient(@direction; @colors) when
+    (@direction = ~"to bottom"),
+    (@direction = ~"to right"),
+    (@direction = ~"to bottom right"),
+    (@direction = ~"to top right"),
+    (@direction = ~"ellipse"),
+    (@direction = ~"ellipse at center") {
+    background-image: svg-gradient(@direction, @colors);
+}

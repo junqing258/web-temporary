@@ -1,0 +1,109 @@
+/**
+ * Fonts
+ * @module fonts
+ * {@link http://www.w3.org/TR/css-fonts-3/ Specification}
+ * =====================================================================================================================
+ */
+
+// Common variables
+@font-name: Roboto; // NOTE: use quotes, if name contains whitespaces
+@font-family: @font-name, Helvetica, Arial, sans-serif;
+@font-path: "../fonts/";
+
+/**
+ * Font Face
+ * {@link https://css-tricks.com/snippets/css/using-font-face/ CSS Tricks}
+ *
+ * @example
+ * .font-face(@file: roboto-regular-webfont);
+ * .font-face(@file: roboto-medium-webfont; @weight: 500);
+ * .font-face(@file: roboto-italic-webfont; @style: italic);
+ *
+ */
+.font-face(@file; @name: @font-name; @weight: normal; @style: normal) {
+    @font-face {
+        font-family: @name;
+        src: url("@{font-path}@{file}.woff2") format("woff2"), // Chrome 36+, Firefox 39+, Opera 23+
+             url("@{font-path}@{file}.woff") format("woff"), // Chrome 5+, Firefox 3.6+, IE 9+, Safari 5.1+, Opera 11.5+
+             url("@{font-path}@{file}.ttf")  format("truetype"); // Chrome 4+, Firefox 3.5+, Safari 3.1+, Opera 10.1+
+        font-weight: @weight;
+        font-style: @style;
+    }
+}
+
+/**
+ * Font
+ *
+ * @example
+ * .font(@family: Arial, sans-serif;);
+ * .font(@style: italic; @weight: 400);
+ * .font(@size: 28px; @line-height: normal);
+ */
+.font(@style: ~""; @variant: ~""; @weight: ~""; @stretch: ~""; @size: ~""; @line-height: ~""; @family: inherit) {
+    .font-style(@style) when (iskeyword(@style)) {
+        font-style: @style;
+    }
+    .font-variant(@variant) when (iskeyword(@variant)) {
+        font-variant: @variant;
+    }
+    .font-weight(@weight) when (iskeyword(@weight)), (isnumber(@weight)) {
+        font-weight: @weight;
+    }
+    .font-stretch(@stretch) when (iskeyword(@stretch)) {
+        font-stretch: @stretch;
+    }
+    .font-size(@size) when (iskeyword(@size)), (isnumber(@size)) {
+        font-size: @size;
+    }
+    .line-height(@line-height) when (iskeyword(@line-height)), (isnumber(@line-height)) {
+        line-height: @line-height;
+    }
+    .font-family(@family) when not (@family = inherit) {
+        font-family: @family;
+    }
+
+    .font-style(@style);
+    .font-variant(@variant);
+    .font-weight(@weight);
+    .font-stretch(@stretch);
+    .font-size(@size);
+    .line-height(@line-height);
+    .font-family(@family);
+}
+
+/**
+ * Font <Weight>
+ *
+ * @example
+ * .font-thin(26px, 1);
+ */
+.font-thin(@size, @line-height)        { .font(@weight: 100; @size: @size; @line-height: @line-height); }
+.font-extra-light(@size, @line-height) { .font(@weight: 200; @size: @size; @line-height: @line-height); }
+.font-light(@size, @line-height)       { .font(@weight: 300; @size: @size; @line-height: @line-height); }
+.font-normal(@size, @line-height)      { .font(@weight: 400; @size: @size; @line-height: @line-height); }
+.font-medium(@size, @line-height)      { .font(@weight: 500; @size: @size; @line-height: @line-height); }
+.font-semi-bold(@size, @line-height)   { .font(@weight: 600; @size: @size; @line-height: @line-height); }
+.font-bold(@size, @line-height)        { .font(@weight: 700; @size: @size; @line-height: @line-height); }
+.font-extra-bold(@size, @line-height)  { .font(@weight: 800; @size: @size; @line-height: @line-height); }
+.font-black(@size, @line-height)       { .font(@weight: 900; @size: @size; @line-height: @line-height); }
+
+/**
+ * Font <Style>
+ *
+ * @example
+ * .font-italic(15px, 18px);
+ */
+.font-italic(@size, @line-height)  { .font(@style: italic; @size: @size; @line-height: @line-height); }
+.font-oblique(@size, @line-height) { .font(@style: oblique; @size: @size; @line-height: @line-height); }
+
+/**
+ * Font Smoothing (works only on Mac OS X platform)
+ * {@link http://davidwalsh.name/font-smoothing David Walsh Blog}
+ *
+ * @example
+ * .font-smoothing();
+ */
+.font-smoothing() {
+    -webkit-font-smoothing: antialiased; // Chrome 5+, Safari 4+, Opera 15+
+    -moz-osx-font-smoothing: grayscale; // Firefox 25+
+}

@@ -1,0 +1,22 @@
+{
+  "title": "Rule of activity",
+  "description": {
+    "part1": "Start",
+    "part2": "Switch language"
+  },
+  "foo": {
+    "bar": "Bottom bar"
+  },
+  "home": {
+    "rank": "Leader Board"
+  },
+  "common": {
+    "index": {
+      "rule": "Rule {{no}}"
+    }
+  },
+  "nav": {
+    "apply": "Rookie King Bonus",
+    "bonus": "Limited time newcomer"
+  }
+}

@@ -1,0 +1,84 @@
+// ===========================================
+// Breakpoints
+// ===========================================
+@screen-phone: 768px;
+@screen-tablet: 992px;
+@screen-desktop: 1200px;
+@screen-large: 1600px;
+
+// ===========================================
+// Responsive Mixins
+// ===========================================
+
+.mobile(@rules) {
+  .mobile-wrap & {
+    @rules();
+  }
+}
+.desktop(@rules) {
+  .desktop-wrap & {
+    @rules();
+  }
+}
+
+@baseSc: 1.2;
+.scRem(@fontSize) {
+  @result: if(ispixel(@fontSize), unit(unit(@fontSize) * @baseSc, px), @fontSize);
+}
+
+.resp(@rules) {
+  // @props: ~` '@{arguments}' `;
+  .desktop-wrap & {
+    @rules();
+  }
+  .mobile-wrap & {
+    // replace( ~`"@{rules}"`, "^(.).*$", "$1");
+    // @rules();
+    each(@rules, {
+      @{key}: .scRem(@value)[];
+    });
+  }
+}
+
+.media-phone(@rules) {
+  @media screen and (max-width: @screen-phone) {
+    @rules();
+  }
+}
+
+.media-tablet(@rules) {
+  @media screen and (min-width: (@screen-phone + 1px)) and (max-width: (@screen-desktop - 1px)) {
+    @rules();
+  }
+}
+
+.media-desktop(@rules) {
+  @media screen and (min-width: @screen-desktop) {
+    @rules();
+  }
+}
+
+.media-custom-max(@width, @rules) {
+  @media screen and (max-width: @width) {
+    @rules();
+  }
+}
+
+.media-custom-min(@width, @rules) {
+  @media screen and (min-width: @width) {
+    @rules();
+  }
+}
+
+// Greater Than
+.media-gt-phone(@rules) {
+  @media (min-width: (@screen-phone + 1px)) {
+    @rules();
+  }
+}
+
+.media-gt-tablet(@rules) {
+  @media (min-width: (@screen-tablet + 1px)) {
+    @rules();
+  }
+}

@@ -1,0 +1,22 @@
+{
+  "common": {
+    "index": {
+      "rule": "規則 {{no}}"
+    }
+  },
+  "description": {
+    "part1": "開始啟動",
+    "part2": "切換語言"
+  },
+  "foo": {
+    "bar": "底部欄"
+  },
+  "home": {
+    "rank": "排行榜"
+  },
+  "title": "活動規則",
+  "nav": {
+    "apply": "新人王獎金賽",
+    "bonus": "限時新人獎勵"
+  }
+}

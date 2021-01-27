@@ -1,0 +1,22 @@
+{
+  "title": "活动规则",
+  "description": {
+    "part1": "开始启动",
+    "part2": "切换语言"
+  },
+  "foo": {
+    "bar": "底部栏"
+  },
+  "nav": {
+    "apply": "新人王奖金赛",
+    "bonus": "限时新人奖励"
+  },
+  "common": {
+    "index": {
+      "rule": "规则 {{no}}"
+    }
+  },
+  "home": {
+    "rank": "排行榜"
+  }
+}

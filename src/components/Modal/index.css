@@ -1,0 +1,117 @@
+.bc__modal {
+  position: fixed;
+  /* width: 400px;
+  height: 250px; */
+  /* width: auto;
+  height: auto; */
+  max-width: 90%;
+  max-width: 90%;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  margin: auto;
+  border-radius: 10px;
+  background: #fff;
+  overflow: hidden;
+  z-index: 9999;
+  box-shadow: 0 0 4px 0 rgba(129, 124, 124, 0.5);
+}
+
+.bc__modal--show {
+  display: block;
+}
+
+.bc__modal--hide {
+  display: none;
+}
+
+.bc__modal-title {
+  width: 100%;
+  height: 50px;
+  line-height: 50px;
+  padding: 0 10px;
+}
+
+.bc__modal-content {
+  width: 100%;
+  height: 100px;
+  padding: 0 10px;
+}
+
+.bc__modal-operator {
+  width: 100%;
+  height: 50px;
+  position: absolute;
+  bottom: 0;
+}
+
+.bc__modal-operator-close,
+.bc__modal-operator-confirm {
+  width: 50%;
+  border: none;
+  outline: none;
+  height: 50px;
+  line-height: 50px;
+  opacity: 1;
+  color: #fff;
+  cursor: pointer;
+}
+
+.bc__modal-operator-close {
+  background: #c0c0c0;
+}
+
+.bc__modal-operator-confirm {
+  background: #25c124;
+}
+
+.bc__modal-operator-close:active,
+.bc__modal-operator-confirm:active {
+  opacity: 0.6;
+  transition: opacity 0.3s;
+}
+
+.bc__mask {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: #000;
+  opacity: 0.7;
+  z-index: 9998;
+}
+
+.bc__alert-enter {
+  opacity: 0;
+  transform: scale(0.9);
+}
+.bc__alert-enter-active {
+  opacity: 1;
+  transform: translateX(0);
+  transition: opacity 300ms, transform 300ms;
+}
+.bc__alert-exit {
+  opacity: 1;
+}
+.bc__alert-exit-active {
+  opacity: 0;
+  transform: scale(0.9);
+  transition: opacity 300ms, transform 300ms;
+}
+
+.bc__mask-enter {
+  opacity: 0;
+}
+.bc__mask-enter-active {
+  opacity: 0.7;
+  transition: opacity 300ms, transform 300ms;
+}
+.bc__mask-exit {
+  opacity: 0.7;
+}
+.bc__mask-exit-active {
+  opacity: 0;
+  transition: opacity 300ms, transform 300ms;
+}

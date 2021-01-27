@@ -1,0 +1,22 @@
+{
+  "common": {
+    "index": {
+      "rule": "Nội quy {{no}}"
+    }
+  },
+  "description": {
+    "part1": "Khởi đầu",
+    "part2": "Chuyển đổi ngôn ngữ"
+  },
+  "foo": {
+    "bar": "Thanh dưới cùng"
+  },
+  "home": {
+    "rank": "Bảng xếp hạng"
+  },
+  "nav": {
+    "apply": "Giải đấu thưởng tân binh",
+    "bonus": "Phần thưởng cho người mới trong thời gian có hạn"
+  },
+  "title": "quy tắc hoạt động"
+}

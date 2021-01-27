@@ -1,0 +1,43 @@
+// Core variables and mixins
+@import "variables.less";
+@import "mixins.less";
+
+//default breakpoints
+@xl-break: 1600px;
+@l-break: 1200px;
+@m-break: 992px;
+@s-break: 758px;
+
+//default sizings
+@col-names: sm, md, lg;
+@col-breaks: @s-break, @m-break, @l-break;
+
+
+.grid {
+  padding-right: @outer-margin;
+  padding-left: @outer-margin;
+}
+.row {
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  margin-right: @gutter-compensation;
+  margin-left: @gutter-compensation;
+}
+
+.row.reverse {
+  .row-reverse();
+}
+.col.reverse {
+   .col-reverse();
+}
+
+.makegrid(xs);
+
+.for-each(@col-breaks);
+.-each(@breakpoint) {
+  @media only screen and (min-width: @breakpoint) {
+    .makegrid(extract(@col-names, @i));
+  }
+}
