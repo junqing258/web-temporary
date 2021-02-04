@@ -20,13 +20,13 @@ module.exports = {
   target: 'web',
   devtool: dev ? 'source-map' : false,
   output: {
-    // publicPath: 'http://localhost:5000/',
     publicPath: dev ? '/' : '',
     path: path.resolve(root, './dist'),
-    /* library: 'web-saba', */
+    /* library: 'web-temporary', */
     /* libraryTarget: 'umd', */
     filename: dev ? 'js/[name].js' : 'js/[name].[fullhash:6].js',
     chunkFilename: dev ? 'js/[name].js' : 'js/[name].[chunkhash:6].js',
+    assetModuleFilename: dev ? 'assets/[name][ext][query]' : 'assets/[name].[hash:6][ext][query]',
   },
   externals: {
     react: 'window.React',
@@ -94,7 +94,6 @@ module.exports = {
     }),
     new HtmlWebpackPlugin({
       template: './public/index.html',
-      // filename: 'views/index.html',
     }),
   ].filter(Boolean),
   module: {
@@ -120,7 +119,7 @@ module.exports = {
       },
       {
         test: /\.(css|less)$/i,
-        include: [path.join(root, 'src'), path.join(root, 'server'), /node_modules[\\/](@reach).*/],
+        include: [path.join(root, 'src'), /node_modules[\\/](@reach).*/],
         use: [
           {
             loader: MiniCssExtractPlugin.loader,
@@ -134,7 +133,6 @@ module.exports = {
                 localIdentName: dev ? '[path][name]__[local]' : '[local]--[hash:base64:5]',
                 localIdentContext: path.resolve(__dirname, '../src'),
               },
-              // esModule: true,
             },
           },
           {
@@ -163,29 +161,15 @@ module.exports = {
       },
       {
         test: /\.(png|jpe?g|gif)$/,
-        exclude: /node_modules/,
-        use: [
-          {
-            loader: 'url-loader',
-            options: {
-              limit: 8192,
-              name: dev ? 'assets/images/[name].[ext]' : 'assets/images/[name].[contenthash:6].[ext]',
-            },
-          },
-        ],
+        type: 'asset',
       },
       {
-        test: /\.(woff|woff2|svg|eot|ttf)$/,
-        exclude: /node_modules/,
-        use: [
-          {
-            loader: 'url-loader',
-            options: {
-              limit: 10240,
-              name: dev ? 'assets/fonts/[name].[ext]' : 'assets/fonts/[name].[contenthash:6].[ext]',
-            },
-          },
-        ],
+        test: /\.svg/,
+        type: 'asset/inline',
+      },
+      {
+        test: /\.(woff|woff2|eot|ttf)$/,
+        type: 'asset/resource',
       },
     ],
   },

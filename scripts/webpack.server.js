@@ -1,6 +1,7 @@
 const path = require('path');
 const webpack = require('webpack');
 const WebpackBar = require('webpackbar');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const nodeExternals = require('webpack-node-externals');
 const config = require('./webpack.config');
 
@@ -13,14 +14,14 @@ const serverConfig = {
   resolve: config.resolve,
   target: 'node',
   entry: {
-    main: path.join(root, 'src/AppSSR.tsx'),
+    ssr: path.join(root, 'src/ssr.tsx'),
   },
   devtool: false,
   output: {
     // publicPath: '/dist/',
     path: path.join(root, 'dist'),
     libraryTarget: 'commonjs2',
-    filename: 'ssr/[name].js',
+    filename: 'server/[name].js',
   },
   externals: [nodeExternals()],
   plugins: [
@@ -52,7 +53,7 @@ const serverConfig = {
       },
       {
         test: /\.(css|less)$/i,
-        include: [path.join(root, 'src'), path.join(root, 'server'), /node_modules[\\/](@reach).*/],
+        include: [path.join(root, 'src'), /node_modules[\\/](@reach).*/],
         use: [
           /* {
             loader: MiniCssExtractPlugin.loader,

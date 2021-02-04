@@ -4,6 +4,7 @@ const path = require('path');
 const express = require('express');
 const helmet = require('helmet');
 const etag = require('etag');
+const favicon = require('serve-favicon');
 const cheerio = require('cheerio');
 const React = require('react');
 const { Helmet } = require('react-helmet');
@@ -12,7 +13,7 @@ const { printDrainHydrateMarks, drainHydrateMarks } = require('react-imported-co
 React.useLayoutEffect = React.useEffect;
 process.env.RENDER_ENV = 'server';
 
-const { render } = require('../dist/ssr/main');
+const { render } = require('../dist/server/ssr');
 // const { render } = require('../src/ssr.tsx');
 
 const app = express();
@@ -20,20 +21,19 @@ const port = 8080;
 
 app.use(
   helmet({
-    contentSecurityPolicy: false /* {
-      directives: {
-        'default-src': ["'self'"],
-        'frame-src': ["'self'"],
-        'style-src': ["'self'", 'https://cdnjs.cloudflare.com', 'https://unpkg.com', 'fonts.googleapis.com'],
-        'script-src': ["'self'", 'https://cdnjs.cloudflare.com', 'https://unpkg.com'],
-        'object-src': ["'none'"],
-      },
-    }, */,
+    contentSecurityPolicy: false,
   }),
 );
-app.use(express.static(path.join(__dirname, '../dist')));
+
+app.use(favicon(path.join(__dirname, '../dist/favicon.ico')));
+app.get(/^\/(js|css|assets|(\d+|\.)|locales)\/(v.+?\/)?(.+$)/, express.static(path.join(__dirname, '../dist')));
 
 app.listen(port, () => console.log(`App listening on port ${port}!`));
+
+/* app.all('/secret', function (req, res, next) {
+  console.log('Accessing the secret section ...');
+  next(); // pass control to the next handler
+}); */
 
 let HTML_TEMPLATE = '',
   tag = etag(String(Date.now()));
@@ -50,7 +50,7 @@ app.get('/*', (req, res) => {
 
 export function generateHtml(markup, state) {
   if (!HTML_TEMPLATE) {
-    HTML_TEMPLATE = fs.readFileSync(path.join(__dirname, '../dist/views/index.html'), { encoding: 'utf8', flag: 'r' });
+    HTML_TEMPLATE = fs.readFileSync(path.join(__dirname, '../dist/index.html'), { encoding: 'utf8', flag: 'r' });
     tag = etag(HTML_TEMPLATE);
   }
   const helmet = Helmet.renderStatic();
