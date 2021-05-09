@@ -6,6 +6,7 @@ const FriendlyErrorsPlugin = require('friendly-errors-plugin');
 const commonConfig = require('./webpack.config.js');
 
 process.env.NODE_ENV = 'development';
+process.env.DEV_SERVER = true;
 
 const config = merge(commonConfig, {
   plugins: [new ReactRefreshPlugin(), new FriendlyErrorsPlugin()],
