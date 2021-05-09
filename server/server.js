@@ -26,7 +26,7 @@ app.use(
 );
 
 app.use(favicon(path.join(__dirname, '../dist/favicon.ico')));
-app.get(/^\/(js|css|assets|(\d+|\.)|locales)\/(v.+?\/)?(.+$)/, express.static(path.join(__dirname, '../dist')));
+app.get(express.static(path.join(__dirname, '../dist')), { index: false });
 
 app.listen(port, () => console.log(`App listening on port ${port}!`));
 
