@@ -1,3 +1,4 @@
+const dev = process.env.NODE_ENV !== 'production';
 module.exports = {
   presets: [
     [
@@ -21,7 +22,7 @@ module.exports = {
     ['@babel/plugin-transform-modules-commonjs'],
     ['@babel/plugin-syntax-dynamic-import'],
     ['@babel/plugin-proposal-optional-chaining'],
-    ['@babel/plugin-transform-async-to-generator'],
+    dev ? null : ['@babel/plugin-transform-async-to-generator'],
     ['@babel/plugin-proposal-decorators', { legacy: true }],
     ['@babel/plugin-proposal-class-properties', { loose: true }],
   ].filter(Boolean),
