@@ -7,8 +7,10 @@
 /**
  * 异步
  */
-export const pipeAsyncFunctions = (...fns: any[]) => (arg: any) =>
-  fns.reduce((p, f) => p.then(f), Promise.resolve(arg));
+export const pipeAsyncFunctions =
+  (...fns: any[]) =>
+  (arg: any) =>
+    fns.reduce((p, f) => p.then(f), Promise.resolve(arg));
 
 export const runPromisesInSeries = (ps: any[]) =>
   ps.reduce((p: Promise<any>, next: any) => p.then(next), Promise.resolve());
@@ -25,13 +27,20 @@ export const chainAsync = (fns: string | any[]) => {
   return next;
 };
 
-export const promisify = (func: any) => (...args: any) =>
-  new Promise((resolve, reject) => func(...args, (err: any, result: any) => (err ? reject(err) : resolve(result))));
+export const promisify =
+  (func: any) =>
+  (...args: any) =>
+    new Promise((resolve, reject) => func(...args, (err: any, result: any) => (err ? reject(err) : resolve(result))));
 
 /**
  * 函数
  */
-export const compose = (...fns: any[]) => fns.reduce((f, g) => (...args: any) => f(g(...args)));
+export const compose = (...fns: any[]) =>
+  fns.reduce(
+    (f, g) =>
+      (...args: any) =>
+        f(g(...args)),
+  );
 
 export const debounce = (fn: { apply: (arg0: any, arg1: any[]) => void }, ms = 0) => {
   let timeoutId: NodeJS.Timeout;
@@ -155,3 +164,25 @@ export const pickBy = (obj: any, fn: (arg0: any, arg1: string) => unknown) =>
   Object.keys(obj)
     .filter((k) => fn(obj[k], k))
     .reduce((acc: any, key) => ((acc[key] = obj[key]), acc), {});
+
+export const firstUpperCase = (str) => str.replace(/^\S/g, (s) => s.toUpperCase());
+export const firstLowerCase = (str) => str.replace(/^\S/g, (s) => s.toLowerCase());
+
+export const mapKeys = (obj, fn) =>
+  Object.keys(obj).reduce((acc, k) => {
+    acc[fn(obj[k], k, obj)] = obj[k];
+    return acc;
+  }, {});
+
+// const addrsToParmas = (addr, type) => mapKeys({name: 'xxxx',  cityId: 211 }, (v, k) => type + firstUpperCase(k))
+
+export const prefixKey = (key, prefix) => prefix + firstUpperCase(key);
+
+export const dePrefixKey = (key, prefix) =>
+  key.replace(new RegExp('^' + prefix), '').replace(/^\S/g, (s) => s.toLowerCase());
+
+export const fromCamelCase = (str, separator = '_') =>
+  str
+    .replace(/([a-z\d])([A-Z])/g, '$1' + separator + '$2')
+    .replace(/([A-Z]+)([A-Z][a-z\d]+)/g, '$1' + separator + '$2')
+    .toLowerCase();
