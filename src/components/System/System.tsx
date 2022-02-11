@@ -1,4 +1,5 @@
 import React from 'react';
+
 import Spinner from './Spinner';
 
 declare const __webpack_init_sharing__: any;
@@ -17,7 +18,7 @@ function loadComponent(scope: any, module: any) {
   };
 }
 
-const cache = {};
+const cache: any = {};
 
 const useDynamicScript = (args: any) => {
   const [ready, setReady] = React.useState<boolean>();

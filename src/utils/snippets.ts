@@ -165,23 +165,24 @@ export const pickBy = (obj: any, fn: (arg0: any, arg1: string) => unknown) =>
     .filter((k) => fn(obj[k], k))
     .reduce((acc: any, key) => ((acc[key] = obj[key]), acc), {});
 
-export const firstUpperCase = (str) => str.replace(/^\S/g, (s) => s.toUpperCase());
-export const firstLowerCase = (str) => str.replace(/^\S/g, (s) => s.toLowerCase());
+export const firstUpperCase = (str: string) => str.replace(/^\S/g, (s: string) => s.toUpperCase());
 
-export const mapKeys = (obj, fn) =>
+export const firstLowerCase = (str: string) => str.replace(/^\S/g, (s: string) => s.toLowerCase());
+
+export const mapKeys = (obj: { [x: string]: any }, fn: (arg0: any, arg1: string, arg2: any) => string | number) =>
   Object.keys(obj).reduce((acc, k) => {
     acc[fn(obj[k], k, obj)] = obj[k];
     return acc;
   }, {});
 
-// const addrsToParmas = (addr, type) => mapKeys({name: 'xxxx',  cityId: 211 }, (v, k) => type + firstUpperCase(k))
+// const addrToParmas = (addr, type) => mapKeys({name: 'xxxx',  cityId: 211 }, (v, k) => type + firstUpperCase(k))
 
-export const prefixKey = (key, prefix) => prefix + firstUpperCase(key);
+export const prefixKey = (key: any, prefix: any) => prefix + firstUpperCase(key);
 
-export const dePrefixKey = (key, prefix) =>
-  key.replace(new RegExp('^' + prefix), '').replace(/^\S/g, (s) => s.toLowerCase());
+export const dePrefixKey = (key: string, prefix: string) =>
+  key.replace(new RegExp('^' + prefix), '').replace(/^\S/g, (s: string) => s.toLowerCase());
 
-export const fromCamelCase = (str, separator = '_') =>
+export const fromCamelCase = (str: string, separator = '_') =>
   str
     .replace(/([a-z\d])([A-Z])/g, '$1' + separator + '$2')
     .replace(/([A-Z]+)([A-Z][a-z\d]+)/g, '$1' + separator + '$2')

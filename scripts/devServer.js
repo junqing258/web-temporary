@@ -12,7 +12,7 @@ const config = merge(commonConfig, {
   plugins: [new ReactRefreshPlugin(), new FriendlyErrorsPlugin()],
 });
 
-const port = 5000;
+const port = 7010;
 
 const options = {
   hot: true,

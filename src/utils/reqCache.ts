@@ -1,5 +1,6 @@
-/* eslint-disable */
+// eslint-disable
 import md5 from 'blueimp-md5';
+
 // import request, { AppResponseType, OK_CODE } from '@app/utils/request';
 
 const request = (url: string, method: string, params: any, customHeaders: any) => Promise.resolve({});

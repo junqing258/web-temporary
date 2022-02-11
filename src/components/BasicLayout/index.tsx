@@ -1,11 +1,12 @@
-import { NavLink } from 'react-router-dom';
 import { useBodyResponsive } from '@/components/useBodyResponsive';
+
 // import { useInterval } from 'react-use';
 import React from 'react';
 // import Language from '../Language';
 import { useTranslation } from 'react-i18next';
-// import 'style-loader!css-loader!react-lazy-load-image-component/src/effects/blur.css';
+import { NavLink } from 'react-router-dom';
 
+// import 'style-loader!css-loader!react-lazy-load-image-component/src/effects/blur.css';
 import './index.less';
 
 const Basic: React.FC = (props: any) => {

@@ -1,9 +1,11 @@
 import { supportedLngs } from '@/utils/i18n';
-import { Menu, MenuList, MenuButton, MenuItem } from '@reach/menu-button';
+
 import { useTranslation } from 'react-i18next';
 
-import './index.less';
+import { Menu, MenuList, MenuButton, MenuItem } from '@reach/menu-button';
 import '@reach/menu-button/styles.css';
+
+import './index.less';
 
 const Language: React.FC = () => {
   const { i18n } = useTranslation();
